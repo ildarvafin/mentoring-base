@@ -5,10 +5,11 @@
         </div>
            <nav class="header-nav">
             <button class="header-nav-item">{{headerItem1}}</button>
-            <button class="header-nav-item">{{headerItem2}}</button>
+            <button class="header-nav-item">{{aboutCompany}}</button>
             <button class="header-nav-item" *ngIf="isShowCatalog">{{headerItem3}}</button>             
            </nav> 
            <button (click)="isShowCatalog=!isShowCatalog">Срыть/Показать Каталог</button>
+           <button (click)="changeMenuText()">Изменить текст</button>
     </div>
         <div class="header-right">
                 <img class="header-Phone" src="assets/Phone.svg" alt="трубка">
@@ -27,11 +28,12 @@
             <img src="assets/light.svg" alt="строки">
         </div>
             <nav class="light-nav">
-                <button class="light-nav-apple">{{lightItem1}}</button>
-                <button class="light-nav-apple"> {{lightItem2}}</button>
+                <!-- <button class="light-nav-apple">{{lightItem1}}</button>
+                <button class="light-nav-apple">{{lightItem2}}</button>
                 <button class="light-nav-apple">{{lightItem3}}</button>
                 <button class="light-nav-apple">{{lightItem4}}</button>
-                <button class="light-nav-apple">{{lightItem5}}</button> 
+                <button class="light-nav-apple">{{lightItem5}}</button>  -->
+                <button class="light-nav-apple" *ngFor="let item of menuItems">{{item}}</button>
             </nav>
             
     </div>
@@ -46,8 +48,15 @@
         </div>
     </div> 
 </div>
-<div>
-    <img src="/assets/man.png"alt="фото" style="width: 100%;"> 
+<div class="but">
+  <button (click)="isShowImg=!isShowImg">Скрыть/Показать фото</button>
+</div>
+
+<div class="baner">
+  <div *ngIf="isShowImg">
+    <img class="baner1" src="/assets/man.png"alt="фото"> 
+  </div>
+    
 </div>
 <div class="content-container">
     <div class="frame">
@@ -74,11 +83,11 @@
     </div>    
     <div class="item-cards">
         <div class="item-cards__pagination">
-            <button class="item-cards__pagination-button active-button">1</button>
-            <button class="item-cards__pagination-button">2</button>
+            <button class="item-cards__pagination-button active-button" *ngFor="let item of nevPagas">{{item}}</button>
+            <!-- <button class="item-cards__pagination-button">2</button>
             <button class="item-cards__pagination-button">3</button>
             <button class="item-cards__pagination-button">4</button>
-            <button class="item-cards__pagination-button">5</button>
+            <button class="item-cards__pagination-button">5</button> -->
         </div>
         <div class="item-cards__grid">
             <div class="item-cards__grid-left"> 
@@ -357,7 +366,7 @@
       </div>
     </section>
 </div> 
-<footer>
+<footer class="bot">
   <div class="footer_cont">
     <div class="footer_left">
       <img src="assets/Frame.svg" alt="">
@@ -376,8 +385,7 @@
           <img
             style="height: 30px; margin-bottom: 0; vertical-align: middle"
             src="assets/Icon_1.svg"
-            alt="mail"
-          />
+            alt="mail"/>
           <span>Электронная почта</span>
           <p>tustin78#mail.ru</p>
           <p>info#tustin.ru</p>
@@ -407,4 +415,4 @@
     </div>
   </div>
 </footer>
-
+<div class="indent"></div>
