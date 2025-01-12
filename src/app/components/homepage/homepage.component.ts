@@ -11,7 +11,6 @@ const newPages:number[] = [5, 4, 3, 2, 1]
   styleUrl: './homepage.component.scss'
 })
 export class HomepageComponent {
-  // isShowCatalog = true
 
   isShowImg = true
 
