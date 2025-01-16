@@ -2,7 +2,7 @@
     <b>КОМПОНЕНТ СПИСКА ЗАДАЧ</b>
 </div>
 <div class="list">
-    <div *ngFor="let todo of todos">
+    <div *ngFor="let todo of todosService. todos$ |async">
         <app-todo-card [todo]="todo" (deleteTodo)="deleteTodo($event)"></app-todo-card>
     </div>
 </div>

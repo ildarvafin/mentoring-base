@@ -10,6 +10,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class UserCardComponent {
   @Input()
   user: any
+  
   @Output()
   deleteUser = new EventEmitter();
 
