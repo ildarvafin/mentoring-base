@@ -1,0 +1,21 @@
+<div class="inscription">
+    <h1>CREATE TODO FORM</h1>
+    <form class="form" [formGroup]="form" (ngSubmit)="submitForm()">
+      <p>ТЕКСТ ЗАДАЧИ:</p>
+      <input type="text"  class ="form-input" formControlName = "title">
+      <div *ngIf="form.controls['title'].invalid && (form.controls['title'].dirty || form.controls['title'].touched)" class="alert">
+        <div *ngIf="form.controls['title'].errors">ТЕКСТ ЗАДАЧИ ВВЕДЕН НЕПРАВИЛЬНО</div>
+    </div>
+      <p>АВТОР ЗАДАЧИ:</p> 
+      <input type="text"  class ="form-input" formControlName = "userId">
+      <div *ngIf="form.controls['userId'].invalid && (form.controls['userId'].dirty || form.controls['userId'].touched)" class="alert">
+        <div *ngIf="form.controls['userId'].errors">АВТОР ВВЕДЕН НЕПРАВИЛЬНО</div>
+    </div>
+      <p>ЗАДАЧА ЗАВЕРШЕНА:</p>
+      <input type="text"  class ="form-input" formControlName = "completed">
+      <div *ngIf="form.controls['completed'].invalid && (form.controls['completed'].dirty || form.controls['completed'].touched)" class="alert">
+        <div *ngIf="form.controls['completed'].errors">ОТВЕТ НЕКОРРЕКТЕН</div>
+    </div>
+      <button class="user" [disabled]="form.invalid">CREATE TODO</button>
+    </form>
+</div>
