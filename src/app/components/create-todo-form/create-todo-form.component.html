@@ -1,21 +1,23 @@
 <div class="inscription">
     <h1>CREATE TODO FORM</h1>
-    <form class="form" [formGroup]="form" (ngSubmit)="submitForm()">
-      <p>ТЕКСТ ЗАДАЧИ:</p>
-      <input type="text"  class ="form-input" formControlName = "title">
-      <div *ngIf="form.controls['title'].invalid && (form.controls['title'].dirty || form.controls['title'].touched)" class="alert">
-        <div *ngIf="form.controls['title'].errors">ТЕКСТ ЗАДАЧИ ВВЕДЕН НЕПРАВИЛЬНО</div>
-    </div>
-      <p>АВТОР ЗАДАЧИ:</p> 
-      <input type="text"  class ="form-input" formControlName = "userId">
-      <div *ngIf="form.controls['userId'].invalid && (form.controls['userId'].dirty || form.controls['userId'].touched)" class="alert">
-        <div *ngIf="form.controls['userId'].errors">АВТОР ВВЕДЕН НЕПРАВИЛЬНО</div>
-    </div>
-      <p>ЗАДАЧА ЗАВЕРШЕНА:</p>
-      <input type="text"  class ="form-input" formControlName = "completed">
-      <div *ngIf="form.controls['completed'].invalid && (form.controls['completed'].dirty || form.controls['completed'].touched)" class="alert">
-        <div *ngIf="form.controls['completed'].errors">ОТВЕТ НЕКОРРЕКТЕН</div>
-    </div>
-      <button class="user" [disabled]="form.invalid">CREATE TODO</button>
+    <form class="form" [formGroup]="form">
+      <mat-form-field>
+        <mat-label>ТЕКСТ ЗАДАЧИ:</mat-label>
+        <input matInput formControlName="title">
+        <mat-error>Некорректное значение</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>АВТОР ЗАДАЧИ:</mat-label>
+        <input matInput formControlName="userId">
+        <mat-error>Некорректное значение</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>ЗАДАЧА ЗАВЕРШЕНА:</mat-label>
+        <input matInput formControlName="completed">
+        <mat-error>Ответ некорректен</mat-error>
+      </mat-form-field>
+      <button type="submit" (click)="submitForm()" matIconSuffix mat-raised-button [disabled]="form.invalid">Add Todo
+        <mat-icon>add</mat-icon>
+    </button>
     </form>
 </div>
