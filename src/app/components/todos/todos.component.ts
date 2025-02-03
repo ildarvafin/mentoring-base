@@ -1,9 +1,10 @@
 import { AsyncPipe, NgFor } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject,} from '@angular/core';
 import { TodoCardComponent } from './todo-card/todo-card.component';
 import { TodosApiService } from '../../todos-api.service';
 import { TodosService } from '../../todos.service';
-import { CreateTodoFormComponent } from '../create-todo-form/create-todo-form.component';
+import { MatIconModule } from '@angular/material/icon';
+import { ButtonCreateTodoFormComponent } from './button-create-todo-form/button-create-todo-form.component';
 
 export interface Todo {
   userId: number,
@@ -22,7 +23,7 @@ export interface createTodo {
 @Component({
   selector: 'app-todos',
   standalone: true,
-  imports: [NgFor, TodoCardComponent, AsyncPipe, CreateTodoFormComponent],
+  imports: [NgFor, TodoCardComponent, AsyncPipe, MatIconModule, ButtonCreateTodoFormComponent],
   templateUrl: './todos.component.html',
   styleUrl: './todos.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -30,11 +31,12 @@ export interface createTodo {
 export class TodosComponent {
 
   readonly todosApiService = inject(TodosApiService);
+
   readonly todosService = inject(TodosService);
 
   constructor() {
     this.todosApiService.getTodos().subscribe(
-      (response: any) => {
+      (response: Todo[]) => {
         this.todosService.setTodos(response);
       }
     )
@@ -44,6 +46,10 @@ export class TodosComponent {
     this.todosService.deleteTodo(id); 
   }
 
+  editTodo(todo: Todo) {
+    this.todosService.editTodo(todo);
+}
+
   public createTodo(formData: createTodo) {
     this.todosService.createTodo({
       id: new Date().getTime(),
@@ -52,5 +58,6 @@ export class TodosComponent {
       completed: formData.  completed,
     });
   }
+
 }
 

@@ -1,6 +1,6 @@
 <div class="inscription">
-    <h1>CREATE USER FORM</h1>
     <form class="form" [formGroup]="form">
+        <h1>CREATE USER FORM</h1>
         <mat-form-field>
             <mat-label>NAME:</mat-label>
             <input matInput formControlName="name">
@@ -16,12 +16,12 @@
             <input matInput formControlName="website">
             <mat-error>Некорректное значение</mat-error>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field formGroupName="company">
             <mat-label>COMPANY NAME:</mat-label>
-            <input matInput formControlName="companyName">
+            <input matInput formControlName="name">
             <mat-error>Некорректное значение</mat-error>
         </mat-form-field>
-        <button type="submit" (click)="submitForm()" matIconSuffix mat-raised-button [disabled]="form.invalid">Add User
+        <button type="submit" (click)="submitForm()" matIconSuffix mat-raised-button [disabled]="form.invalid"  >Add User
             <mat-icon>add</mat-icon>
         </button>
     </form>

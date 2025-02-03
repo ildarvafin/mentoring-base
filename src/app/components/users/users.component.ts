@@ -3,7 +3,9 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { UsersApiService } from '../../users-api.service';
 import { UserCardComponent } from './user-card/user-card.component';
 import { UsersService } from '../../users.service';
-import { CreateUserFormComponent } from '../create-user-form/create-user-form.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { ButtonCreateUserFormComponent } from './button-create-user-form/button-create-user-form.component';
 
 export interface User {
   id:       number;
@@ -34,23 +36,27 @@ export interface createUser {
     name:     string;
     email:    string;
     website: string;
-    companyName: string;
+    company: {
+        name: string;
+    }
 }
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [NgFor, UserCardComponent, AsyncPipe, CreateUserFormComponent],
+  imports: [NgFor, UserCardComponent, AsyncPipe, MatButtonModule, MatIconModule,ButtonCreateUserFormComponent],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UsersComponent {
     readonly usersApiService = inject(UsersApiService);
+
     readonly usersService = inject(UsersService);
+
     constructor() {
         this.usersApiService.getUseres().subscribe(
-            (response: any) => {
+            (response: User[]) => {
                 this.usersService.setUsers(response);
             }
         )
@@ -60,6 +66,20 @@ export class UsersComponent {
         this.usersService.deleteUser(id);
     }
 
+    editUser(user: User) {
+        this.usersService.editUser({
+          ...user,
+          company: {
+            name: user.company.name
+          }  
+        })
+    }
+
+
+    // editUser(user: User) {
+    //     this.usersService.editUser({...user});
+    // }
+
     public createUser(formData: createUser) {
         this.usersService.createUser({
             id: new Date().getTime(),
@@ -67,8 +87,10 @@ export class UsersComponent {
             email: formData.email,
             website: formData.website,
             company: {
-                name: formData.companyName,
-            }
+                name:formData.company.name,
+            },
         });
+        console.log(formData)
     }
-}
+  }
+

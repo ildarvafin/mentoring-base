@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -26,11 +27,13 @@ export function completedValidator(): ValidatorFn {
 export class CreateTodoFormComponent {
 
   @Output()
-   createTodo = new EventEmitter();
+  createTodo = new EventEmitter();
+
+  readonly dialogRef = inject(MatDialogRef<CreateTodoFormComponent>);
 
   public form = new FormGroup({
     title: new FormControl('', [Validators.required, Validators. minLength(3)]),
-    userId: new FormControl('', [Validators.required, Validators. minLength(3)]),
+    userId: new FormControl('', [Validators.required, Validators. minLength(1)]),
     completed: new FormControl('', [Validators.required, completedValidator()]),
   });
 
@@ -42,7 +45,7 @@ export class CreateTodoFormComponent {
   }
 
   public submitForm(): void {
-    this.createTodo.emit({...this.form.value, completed: this.getCompletedValue ()});
-    this.form.reset();
+    this.dialogRef.close({...this.form.value, completed: this.getCompletedValue ()});
     }
 }
+ 
