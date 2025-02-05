@@ -1,34 +1,35 @@
 
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { Todo } from '../todos.component';
 import { EditTodoDialogComponent } from '../edit-todo-dialog/edit-todo-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DeleteTodoDialogComponent } from '../delete-todo-dialog/delete-todo-dialog.component';
+import { Todo } from '../../../interface/todo.interface';
+import { TruncatePipe } from '../../../pipes/value-limitation';
 
 @Component({
   selector: 'app-todo-card',
   standalone: true,
-  imports: [MatDialogModule,],
+  imports: [MatDialogModule, TruncatePipe ],
   templateUrl: './todo-card.component.html',
   styleUrl: './todo-card.component.scss'
 })
 export class TodoCardComponent {
   @Input()
-  todo!: Todo
+  public todo!: Todo
 
   @Output()
-  deleteTodo = new EventEmitter();
+  public deleteTodo = new EventEmitter();
 
   @Output()
-  editTodo = new EventEmitter();
+  public editTodo = new EventEmitter();
 
-   readonly dialog = inject(MatDialog);
+   public readonly dialog = inject(MatDialog);
 
    private snackBar = inject(MatSnackBar);
 
-   openDeleteDialog(): void {
+   public openDeleteDialog(): void {
       const dialogRef = this.dialog.open(DeleteTodoDialogComponent, {
         data: {todo:this.todo},
       });
@@ -47,7 +48,7 @@ export class TodoCardComponent {
       });
     }
 
-  openDialog(): void {
+  public openDialog(): void {
       const dialogRef = this.dialog.open(EditTodoDialogComponent, {
         data: {todo:this.todo},
       });

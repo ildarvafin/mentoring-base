@@ -6,40 +6,8 @@ import { UsersService } from '../../users.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ButtonCreateUserFormComponent } from './button-create-user-form/button-create-user-form.component';
+import { createUser, User } from '../../interface/user.interface';
 
-export interface User {
-  id:       number;
-  name:     string;
-  username?: string;
-  email:    string;
-  address?: {
-      street:  string;
-      suite:   string;
-      city:    string;
-      zipcode: string;
-      geo: {
-          lat: string;
-          lng: string;
-      };
-  };
-  phone?:   string;
-  website: string;
-  company: {
-      name:        string;
-      catchPhrase?: string;
-      bs?:          string;
-  };
-}
-
-export interface createUser {
-    id:       number;
-    name:     string;
-    email:    string;
-    website: string;
-    company: {
-        name: string;
-    }
-}
 
 @Component({
   selector: 'app-users',
@@ -50,9 +18,10 @@ export interface createUser {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UsersComponent {
-    readonly usersApiService = inject(UsersApiService);
 
-    readonly usersService = inject(UsersService);
+    private readonly usersApiService = inject(UsersApiService);
+
+    public readonly usersService = inject(UsersService);
 
     constructor() {
         this.usersApiService.getUseres().subscribe(
@@ -60,25 +29,15 @@ export class UsersComponent {
                 this.usersService.setUsers(response);
             }
         )
-    }
+    };
 
-    deleteUser(id: number) {
+    public deleteUser(id: number) {
         this.usersService.deleteUser(id);
-    }
+    };
 
-    editUser(user: User) {
-        this.usersService.editUser({
-          ...user,
-          company: {
-            name: user.company.name
-          }  
-        })
-    }
-
-
-    // editUser(user: User) {
-    //     this.usersService.editUser({...user});
-    // }
+    public editUser(user: User) {
+        this.usersService.editUser(user);
+    };
 
     public createUser(formData: createUser) {
         this.usersService.createUser({
@@ -87,10 +46,10 @@ export class UsersComponent {
             email: formData.email,
             website: formData.website,
             company: {
-                name:formData.company.name,
+                name: formData.company.name,
             },
         });
         console.log(formData)
     }
-  }
+}
 

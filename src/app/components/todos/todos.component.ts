@@ -5,20 +5,8 @@ import { TodosApiService } from '../../todos-api.service';
 import { TodosService } from '../../todos.service';
 import { MatIconModule } from '@angular/material/icon';
 import { ButtonCreateTodoFormComponent } from './button-create-todo-form/button-create-todo-form.component';
+import { createTodo, Todo } from '../../interface/todo.interface';
 
-export interface Todo {
-  userId: number,
-  id: number,
-  title: string,
-  completed: boolean
-}
-
-export interface createTodo {
-  userId: number,
-  id: number,
-  title: string,
-  completed: boolean
-}
 
 @Component({
   selector: 'app-todos',
@@ -30,9 +18,9 @@ export interface createTodo {
 })
 export class TodosComponent {
 
-  readonly todosApiService = inject(TodosApiService);
+  private readonly todosApiService = inject(TodosApiService);
 
-  readonly todosService = inject(TodosService);
+  public readonly todosService = inject(TodosService);
 
   constructor() {
     this.todosApiService.getTodos().subscribe(
@@ -42,11 +30,11 @@ export class TodosComponent {
     )
   }
 
-  deleteTodo(id: number) {
+  public deleteTodo(id: number) {
     this.todosService.deleteTodo(id); 
   }
 
-  editTodo(todo: Todo) {
+  public editTodo(todo: Todo) {
     this.todosService.editTodo(todo);
 }
 

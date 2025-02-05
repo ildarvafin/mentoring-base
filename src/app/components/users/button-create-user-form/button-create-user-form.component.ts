@@ -15,13 +15,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ButtonCreateUserFormComponent {
 
   @Output()
-  createUser = new EventEmitter();
+  public createUser = new EventEmitter();
 
   readonly dialog = inject(MatDialog);
 
   private snackBar = inject(MatSnackBar);
 
-  openDialog(): void {
+  public openDialog(): void {
     const dialogRef = this.dialog.open(CreateUserFormComponent);
     dialogRef.afterClosed().subscribe(editResult => {
       console.log('МОДАЛКА ЗАКРЫЛАСЬ, ЗНАЧЕНИЕ ФОРМЫ:', editResult);

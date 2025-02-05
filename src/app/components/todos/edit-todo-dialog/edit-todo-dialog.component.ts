@@ -4,8 +4,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { Todo } from '../todos.component';
 import { MAT_DIALOG_DATA, MatDialogClose, MatDialogModule, } from '@angular/material/dialog';
+import { Todo } from '../../../interface/todo.interface';
 
 export function completedValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {

@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
-import { User } from '../users.component';
 import { MatButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { User } from '../../../interface/user.interface';
 
 @Component({
   selector: 'app-delete-user-dialog',

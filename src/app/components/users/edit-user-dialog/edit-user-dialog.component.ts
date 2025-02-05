@@ -5,7 +5,9 @@ import { MAT_DIALOG_DATA, MatDialogClose } from "@angular/material/dialog";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
-import { User } from "../users.component";
+import { User } from "../../../interface/user.interface";
+
+
 
 @Component({
     selector: 'app-edit-dialog',
@@ -22,6 +24,7 @@ export class EditUserDialogComponent {
     public form = new FormGroup({
         name: new FormControl(this.data.user.name, [Validators.required, Validators.minLength(3)]),
         email: new FormControl(this.data.user.email, [Validators.required, Validators.email]),
+        phone: new FormControl(this.data.user.phone, [Validators.required,]),
         website: new FormControl(this.data.user.website, [Validators.required, Validators.minLength(3)]),
         company: new FormGroup({
            name: new FormControl(this.data.user.company.name, [Validators.required, Validators.minLength(3)]), 

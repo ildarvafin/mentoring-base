@@ -1,33 +1,36 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { User } from '../users.component';
 import { MatDialog } from '@angular/material/dialog';
 import {MatDialogModule} from '@angular/material/dialog';
 import { EditUserDialogComponent } from '../edit-user-dialog/edit-user-dialog.component';
 import { DeleteUserDialogComponent } from '../delete-user-dialog/delete-user-dialog.component';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+import { User } from '../../../interface/user.interface';
+import { CustomUpperCasePipe } from '../../../pipes/upper-case.pipes';
+import { RemoveDashesPipe } from '../../../pipes/remove-dashes.pipe';
+
 
 @Component({
   selector: 'app-user-card',
   standalone: true,
-  imports: [MatDialogModule, MatSnackBarModule],
+  imports: [MatDialogModule, MatSnackBarModule, CustomUpperCasePipe, RemoveDashesPipe],
   templateUrl: './user-card.component.html',
   styleUrl: './user-card.component.scss'
 })
 export class UserCardComponent {
   @Input()
-  user!: User
+  public user!: User
   
   @Output()
-  deleteUser = new EventEmitter<number>();
+  public deleteUser = new EventEmitter<number>();
 
   @Output()
-  editUser = new EventEmitter<User>();
+  public editUser = new EventEmitter<User>();
 
   readonly dialog = inject(MatDialog);
 
   private snackBar = inject(MatSnackBar);
 
-  openDeleteDialog(): void {
+  public openDeleteDialog(): void {
     const dialogRef = this.dialog.open(DeleteUserDialogComponent, {
       data: {user:this.user},
     });
@@ -46,7 +49,7 @@ export class UserCardComponent {
     });
   }
 
-  openDialog(): void {
+  public openDialog(): void {
     const dialogRef = this.dialog.open(EditUserDialogComponent, {
       data: {user:this.user},
     });

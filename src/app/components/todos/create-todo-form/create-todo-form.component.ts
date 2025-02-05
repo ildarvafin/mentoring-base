@@ -27,7 +27,7 @@ export function completedValidator(): ValidatorFn {
 export class CreateTodoFormComponent {
 
   @Output()
-  createTodo = new EventEmitter();
+  public createTodo = new EventEmitter();
 
   readonly dialogRef = inject(MatDialogRef<CreateTodoFormComponent>);
 

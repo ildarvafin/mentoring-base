@@ -14,14 +14,14 @@ import { CreateTodoFormComponent } from '../create-todo-form/create-todo-form.co
 })
 export class ButtonCreateTodoFormComponent {
   
- @Output()
-  createTodo = new EventEmitter();
+  @Output()
+  public createTodo = new EventEmitter();
 
   readonly dialog = inject(MatDialog);
 
   private snackBar = inject(MatSnackBar);
 
-  openDialog(): void {
+  public openDialog(): void {
     const dialogRef = this.dialog.open(CreateTodoFormComponent);
     dialogRef.afterClosed().subscribe(editResult => {
       console.log('МОДАЛКА ЗАКРЫЛАСЬ, ЗНАЧЕНИЕ ФОРМЫ:', editResult);

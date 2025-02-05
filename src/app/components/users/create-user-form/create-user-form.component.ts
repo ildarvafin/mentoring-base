@@ -18,18 +18,19 @@ export class CreateUserFormComponent {
   readonly dialogRef = inject(MatDialogRef<CreateUserFormComponent>);
 
   @Output()
-  createUser = new EventEmitter();
+  public createUser = new EventEmitter();
 
   public form = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     email: new FormControl('', [Validators.required, Validators.email]),
+    phone: new FormControl('', [Validators.required,]),
     website: new FormControl('', [Validators.required, Validators.minLength(3)]),
     company: new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.minLength(3)]), 
-   }),
+      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    }),
   });
 
-   submitForm() {
+  public submitForm() {
     this.dialogRef.close(this.form.value);
-   }
+  }
 }

@@ -11,8 +11,10 @@
     <button (click)="isShowCatalog=!isShowCatalog">Срыть/Показать Каталог</button>
     <button (click)="changeMenuText()">Изменить текст</button>
     <button routerLink="todos">Админка</button>
+
   </div>
   <div class="header-right">
+    <p class="date">Дата: {{currentDate | date:'medium'}}</p>
     <img class="header-Phone" src="assets/Phone.svg" alt="трубка">
     <a class="phone-nav" href="tel:+79196414039">+7 (965) 084-29-29</a>
     <img class="header-heart" src="assets/heart 1.svg" alt="сердечько">
