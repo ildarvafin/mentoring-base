@@ -26,7 +26,8 @@
             <input matInput formControlName="name">
             <mat-error>Некорректное значение</mat-error>
         </mat-form-field>
-        <button type="submit" (click)="submitForm()" matIconSuffix mat-raised-button [disabled]="form.invalid"  >Add User
+        <button matTooltip = "ДОБАВИТЬ ПОЛЬЗОВАТЕЛЯ"
+        type="submit" (click)="submitForm()" matIconSuffix mat-raised-button [disabled]="form.invalid"  >Add User
             <mat-icon>add</mat-icon>
         </button>
     </form>

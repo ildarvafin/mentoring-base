@@ -25,7 +25,9 @@
                 <input matInput formControlName="name">
                 <mat-error>Некорректное значение</mat-error>
             </mat-form-field>
-        <button matIconSuffix mat-raised-button [disabled]="form.invalid" [mat-dialog-close] ="userWithUpdatedFields">Редактировать
+        <button matTooltip = "Редактировать данные пользователя" 
+            matIconSuffix
+            mat-raised-button [disabled]="form.invalid" [mat-dialog-close] ="userWithUpdatedFields">Редактировать
             <mat-icon>edit</mat-icon>
         </button>
     </form>

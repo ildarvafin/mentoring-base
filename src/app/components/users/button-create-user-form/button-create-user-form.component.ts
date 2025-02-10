@@ -4,11 +4,13 @@ import { CreateUserFormComponent } from '../create-user-form/create-user-form.co
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HighlightDirective } from '../../../directives/highlight.directive';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-button-create-user-form',
   standalone: true,
-  imports: [MatButtonModule, MatIconModule],
+  imports: [MatButtonModule, MatIconModule, HighlightDirective, MatTooltipModule],
   templateUrl: './button-create-user-form.component.html',
   styleUrl: './button-create-user-form.component.scss'
 })

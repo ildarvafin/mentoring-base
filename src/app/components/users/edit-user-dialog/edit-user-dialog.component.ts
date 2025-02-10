@@ -6,6 +6,7 @@ import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { User } from "../../../interface/user.interface";
+import { MatTooltipModule } from "@angular/material/tooltip";
 
 
 
@@ -14,7 +15,15 @@ import { User } from "../../../interface/user.interface";
     standalone: true,
     templateUrl: './edit-user-dialog.component.html',
     styleUrl: './edit-user-dialog.component.scss',
-    imports: [ReactiveFormsModule, MatInputModule, MatFormFieldModule,  MatButtonModule, MatIconModule, MatDialogClose]
+    imports: [
+        ReactiveFormsModule, 
+        MatInputModule, 
+        MatFormFieldModule,  
+        MatButtonModule, 
+        MatIconModule, 
+        MatDialogClose,
+        MatTooltipModule,
+    ]
 })
 
 export class EditUserDialogComponent {

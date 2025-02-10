@@ -1,9 +1,18 @@
-<div class="list-cards">
-    <p> {{user.name | customUpperCase}}</p>
-    <p>{{user.email | customUpperCase}}</p>
-    <p>{{user.phone  | removeDashes}}</p>
-    <p> {{user.website | customUpperCase}}</p>
-    <p> {{user.company.name}}</p>
-    <button (click)="openDeleteDialog()" class="key">delete</button>
-    <button (click)="openDialog()" class="key">edit</button>
-</div>
+
+    <mat-card appShadow class="list-cards">
+        <mat-card-content>
+            <p red> {{user.name | customUpperCase}}</p>
+            <p red>{{user.email | customUpperCase}}</p>
+            <p red>{{user.phone  | removeDashes}}</p>
+            <p red> {{user.website | customUpperCase}}</p>
+            <p red > {{user.company.name}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button matTooltip = "Удалить"
+                mat-button red (click)="openDeleteDialog()" class="key">delete</button>
+            <button mat-raised-button matTooltip = "Редактировать"
+                mat-button red (click)="openDialog()" class="key">edit</button>
+        </mat-card-actions> 
+    </mat-card>
+   
+    

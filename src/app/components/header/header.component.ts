@@ -1,6 +1,7 @@
 import { DatePipe, NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { HighlightDirective } from '../../directives/highlight.directive';
 
 const func = (date: string) => {return date}
 
@@ -21,7 +22,7 @@ const upperCaseMenuItems = menuItems.map(
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [NgIf, NgFor, RouterLink, DatePipe],
+  imports: [NgIf, NgFor, RouterLink, DatePipe,  HighlightDirective],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })

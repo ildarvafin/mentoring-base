@@ -17,8 +17,10 @@
         <input matInput formControlName="completed">
         <mat-error>Ответ некорректен</mat-error>
       </mat-form-field>
-      <button type="submit" (click)="submitForm()" matIconSuffix mat-raised-button [disabled]="form.invalid">Add Todo
+      <button matTooltip = "Добавить данные пользователя"
+        type="submit" (click)="submitForm()" matIconSuffix mat-raised-button [disabled]="form.invalid">Add Todo
         <mat-icon>add</mat-icon>
     </button>
     </form>
 </div>
+

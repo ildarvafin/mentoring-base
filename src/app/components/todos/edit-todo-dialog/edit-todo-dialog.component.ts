@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MAT_DIALOG_DATA, MatDialogClose, MatDialogModule, } from '@angular/material/dialog';
 import { Todo } from '../../../interface/todo.interface';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 export function completedValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -21,7 +22,16 @@ export function completedValidator(): ValidatorFn {
 @Component({
   selector: 'app-edit-todo-dialog',
   standalone: true,
-  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule,  MatButtonModule, MatIconModule, MatDialogClose, MatDialogModule],
+  imports: [
+    ReactiveFormsModule, 
+    MatFormFieldModule, 
+    MatInputModule,  
+    MatButtonModule, 
+    MatIconModule,
+    MatDialogClose, 
+    MatDialogModule,
+    MatTooltipModule
+  ],
   templateUrl: './edit-todo-dialog.component.html',
   styleUrl: './edit-todo-dialog.component.scss'
 })

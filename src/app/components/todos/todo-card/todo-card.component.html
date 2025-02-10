@@ -5,6 +5,6 @@
     <div>{{todo.userId}}</div>
     <p>ЗАДАЧА ЗАВЕРШЕНА:</p>
     <div>{{todo.completed ? 'ДА' : 'НЕТ'}}</div>
-    <button (click)="openDeleteDialog()" class="key">delete</button>
-    <button (click)="openDialog()"class="key">edit</button>
+    <button matTooltip = "Удалить" (click)="openDeleteDialog()" class="key">delete</button>
+    <button matTooltip = "Редактировать" (click)="openDialog()"class="key">edit</button>
 </div>

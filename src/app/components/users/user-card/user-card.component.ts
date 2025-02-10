@@ -7,15 +7,30 @@ import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import { User } from '../../../interface/user.interface';
 import { CustomUpperCasePipe } from '../../../pipes/upper-case.pipes';
 import { RemoveDashesPipe } from '../../../pipes/remove-dashes.pipe';
-
+import { RedDirective } from '../../../directives/red.directive';
+import {MatCardModule} from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { ShadowDirective } from '../../../directives/shadow.directives';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-user-card',
   standalone: true,
-  imports: [MatDialogModule, MatSnackBarModule, CustomUpperCasePipe, RemoveDashesPipe],
+  imports: [
+    MatDialogModule, 
+    MatSnackBarModule, 
+    CustomUpperCasePipe,
+    RemoveDashesPipe,
+    RedDirective, 
+    MatCardModule,  
+    MatButtonModule, 
+    ShadowDirective,
+    MatTooltipModule
+  ],
   templateUrl: './user-card.component.html',
   styleUrl: './user-card.component.scss'
 })
+
 export class UserCardComponent {
   @Input()
   public user!: User

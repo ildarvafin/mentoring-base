@@ -7,11 +7,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { DeleteTodoDialogComponent } from '../delete-todo-dialog/delete-todo-dialog.component';
 import { Todo } from '../../../interface/todo.interface';
 import { TruncatePipe } from '../../../pipes/value-limitation';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-todo-card',
   standalone: true,
-  imports: [MatDialogModule, TruncatePipe ],
+  imports: [MatDialogModule, TruncatePipe, MatTooltipModule],
   templateUrl: './todo-card.component.html',
   styleUrl: './todo-card.component.scss'
 })

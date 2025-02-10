@@ -16,7 +16,8 @@
             <input matInput formControlName="completed">
             <mat-error>Ответ некорректен</mat-error>
         </mat-form-field>
-        <button matIconSuffix mat-raised-button  [disabled]="form.invalid" [mat-dialog-close]="userWithUpdatedFields">Редактировать
+        <button matTooltip = "Редактировать"
+            matIconSuffix mat-raised-button  [disabled]="form.invalid" [mat-dialog-close]="userWithUpdatedFields">Редактировать
             <mat-icon>edit</mat-icon>
         </button>
     </form>
