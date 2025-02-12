@@ -7,11 +7,11 @@
       <button class="header-nav-item" routerLink="users">{{headerItem1}}</button>
       <button class="header-nav-item" routerLink="/">{{aboutCompany}}</button>
       <button class="header-nav-item" *ngIf="isShowCatalog">{{headerItem3}}</button>
+      <button class="header-nav-item" (click)="isShowCatalog=!isShowCatalog">Срыть/Показать</button>
+      <button class="header-nav-item" (click)="changeMenuText()">Изменить</button>
+      <button class="header-nav-item" routerLink="todos">Задача</button>
+      <button class="header-nav-item" routerLink="admin">Админка</button>
     </nav>
-    <button (click)="isShowCatalog=!isShowCatalog">Срыть/Показать Каталог</button>
-    <button (click)="changeMenuText()">Изменить текст</button>
-    <button routerLink="todos">Админка</button>
-
   </div>
   <div class="header-right">
     <p class="date">{{currentDate | date:'medium'}}</p>
@@ -22,6 +22,10 @@
       <img src="assets/Mask group.svg" alt="корзина">
       <span class="nav-one">Пусто</span>
     </button>
+    <div>
+      <button (click)="openDialog()" *ngIf="(userService.user$ | async) === null">Войти</button>
+      <button (click)="logout()" *ngIf="(userService.user$ | async) !== null">Выйти</button>
+    </div>
   </div>
 </div>
 <div class="light">

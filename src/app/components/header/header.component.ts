@@ -1,7 +1,10 @@
-import { DatePipe, NgFor, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { AsyncPipe, DatePipe, NgFor, NgIf } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { HighlightDirective } from '../../directives/highlight.directive';
+import { MatDialog } from '@angular/material/dialog';
+import { AuthComponent } from '../../auth/auth.component';
+import { UserService } from '../../user.service';
 
 const func = (date: string) => {return date}
 
@@ -22,11 +25,15 @@ const upperCaseMenuItems = menuItems.map(
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [NgIf, NgFor, RouterLink, DatePipe,  HighlightDirective],
+  imports: [NgIf, NgFor, RouterLink, DatePipe, HighlightDirective, AsyncPipe,],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+
+  private readonly dialog = inject(MatDialog);
+
+  public readonly userService = inject(UserService);
 
   currentDate: Date = new Date();
 
@@ -46,5 +53,31 @@ export class HeaderComponent {
       item => this.isUpperCase ? item.toLowerCase() : item.toUpperCase()
     )
     this.isUpperCase = !this.isUpperCase 
+  }
+
+  public openDialog(): void {
+    const dialogRef = this.dialog.open(AuthComponent, {
+        width: '400px',
+        height: '200px'
+
+      });
+  
+      dialogRef.afterClosed().subscribe((result: string) => {
+        console.log('Результат подписки после диалогового окна',result);
+        if (result ==='admin') {
+          this.userService.loginAsAdmin()
+        } else if (result === 'user') {
+          this.userService.loginAsUser()
+        } else return undefined;
+      }
+    );
+  }
+
+  public logout() {
+    if(confirm('Вы точно хотите выйти?')) {
+      console.log('Совершили logout');
+      return this.userService.logout()
+    }
+    else return false;
   }
 }
