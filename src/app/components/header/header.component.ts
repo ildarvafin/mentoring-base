@@ -63,7 +63,6 @@ export class HeaderComponent {
       });
   
       dialogRef.afterClosed().subscribe((result: string) => {
-        console.log('Результат подписки после диалогового окна',result);
         if (result ==='admin') {
           this.userService.loginAsAdmin()
         } else if (result === 'user') {
@@ -75,7 +74,6 @@ export class HeaderComponent {
 
   public logout() {
     if(confirm('Вы точно хотите выйти?')) {
-      console.log('Совершили logout');
       return this.userService.logout()
     }
     else return false;

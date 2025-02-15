@@ -7,7 +7,7 @@
       <button class="header-nav-item" routerLink="users">{{headerItem1}}</button>
       <button class="header-nav-item" routerLink="/">{{aboutCompany}}</button>
       <button class="header-nav-item" *ngIf="isShowCatalog">{{headerItem3}}</button>
-      <button class="header-nav-item" (click)="isShowCatalog=!isShowCatalog">Срыть/Показать</button>
+      <button class="header-nav-item" (click)="isShowCatalog=!isShowCatalog">Скрыть</button>
       <button class="header-nav-item" (click)="changeMenuText()">Изменить</button>
       <button class="header-nav-item" routerLink="todos">Задача</button>
       <button class="header-nav-item" routerLink="admin">Админка</button>
@@ -23,8 +23,16 @@
       <span class="nav-one">Пусто</span>
     </button>
     <div>
-      <button (click)="openDialog()" *ngIf="(userService.user$ | async) === null">Войти</button>
-      <button (click)="logout()" *ngIf="(userService.user$ | async) !== null">Выйти</button>
+      <button 
+        appHighlight class="admin" 
+        (click)="openDialog()" 
+        *ngIf="(userService.user$ | async) === null">Войти
+      </button>
+      <button 
+        appHighlight class="admin" 
+        (click)="logout()" 
+        *ngIf="(userService.user$ | async) !== null" routerLink="/">Выйти
+      </button>
     </div>
   </div>
 </div>
@@ -34,7 +42,9 @@
       <img src="assets/light.svg" alt="строки">
     </div>
     <nav class="light-nav">
-      <button class="light-nav-apple" *ngFor="let item of menuItems">{{item}}</button>
+      <button class="light-nav-apple" 
+        *ngFor="let item of menuItems">{{item}}
+      </button>
     </nav>
   </div>
   <div class="light-right">

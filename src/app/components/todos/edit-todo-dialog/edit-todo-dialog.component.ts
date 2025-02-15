@@ -36,25 +36,26 @@ export function completedValidator(): ValidatorFn {
   styleUrl: './edit-todo-dialog.component.scss'
 })
 export class EditTodoDialogComponent {
- private readonly data = inject<{todo: Todo}>(MAT_DIALOG_DATA);
+  private readonly data = inject<{ todo: Todo }>(MAT_DIALOG_DATA);
 
-   public form = new FormGroup({
-     title: new FormControl(this.data.todo.title, [Validators.required, Validators. minLength(3)]),
-     userId: new FormControl(this.data.todo.userId, [Validators.required, Validators. minLength(1)]),
-     completed: new FormControl('', [Validators.required, completedValidator()]),
-   });
+  public form = new FormGroup({
+    title: new FormControl(this.data.todo.title, [Validators.required, Validators.minLength(3)]),
+    userId: new FormControl(this.data.todo.userId, [Validators.required, Validators.minLength(1)]),
+    completed: new FormControl('', [Validators.required, completedValidator()]),
+  });
 
-   private getCompletedValue(): boolean {
+  private getCompletedValue(): boolean {
     const value = this.form.get('completed')?.value!.trim().toLowerCase();
     if (value === 'да')
       return true;
     else return false;
   }
 
-   get userWithUpdatedFields() {
+  get userWithUpdatedFields() {
     return {
-        ...this.form.value,
-        id: this.data.todo.id,
+      ...this.form.value,
+      id: this.data.todo.id,
+      completed: this.getCompletedValue()
     };
-}
+  }
 }

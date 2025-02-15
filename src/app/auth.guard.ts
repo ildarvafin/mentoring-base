@@ -13,7 +13,7 @@ export const authGuard: CanActivateFn = (route, state) => {
     return true;
   } else {
     console.log(userService.isAdmin);
-    router.navigate(['/todos'])
+    router.navigate([])
     return false
   }
 };
