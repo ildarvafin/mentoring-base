@@ -1,4 +1,4 @@
-import {Component, EventEmitter, inject, Output } from '@angular/core';
+import {ChangeDetectionStrategy, Component, EventEmitter, inject, Output } from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -13,9 +13,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   standalone: true,
   imports: [ReactiveFormsModule, MatInputModule, MatFormFieldModule, MatButtonModule, MatIconModule, MatTooltipModule],
   templateUrl: './create-user-form.component.html',
-  styleUrl: './create-user-form.component.scss'
+  styleUrl: './create-user-form.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
 
 export class CreateUserFormComponent {
 
@@ -24,7 +24,7 @@ export class CreateUserFormComponent {
   @Output()
   public createUser = new EventEmitter();
 
-  public form = new FormGroup({
+  public form: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     email: new FormControl('', [Validators.required, Validators.email]),
     phone: new FormControl('', [Validators.required, phoneValidator()]),

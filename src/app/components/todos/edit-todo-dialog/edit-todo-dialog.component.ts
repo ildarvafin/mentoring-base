@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -18,7 +18,6 @@ export function completedValidator(): ValidatorFn {
   };
 }
 
-
 @Component({
   selector: 'app-edit-todo-dialog',
   standalone: true,
@@ -33,12 +32,14 @@ export function completedValidator(): ValidatorFn {
     MatTooltipModule
   ],
   templateUrl: './edit-todo-dialog.component.html',
-  styleUrl: './edit-todo-dialog.component.scss'
+  styleUrl: './edit-todo-dialog.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditTodoDialogComponent {
+
   private readonly data = inject<{ todo: Todo }>(MAT_DIALOG_DATA);
 
-  public form = new FormGroup({
+  public form: FormGroup = new FormGroup({
     title: new FormControl(this.data.todo.title, [Validators.required, Validators.minLength(3)]),
     userId: new FormControl(this.data.todo.userId, [Validators.required, Validators.minLength(1)]),
     completed: new FormControl('', [Validators.required, completedValidator()]),

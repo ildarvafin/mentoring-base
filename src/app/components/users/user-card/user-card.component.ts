@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import {MatDialogModule} from '@angular/material/dialog';
 import { EditUserDialogComponent } from '../edit-user-dialog/edit-user-dialog.component';
@@ -17,65 +17,58 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   selector: 'app-user-card',
   standalone: true,
   imports: [
-    MatDialogModule, 
-    MatSnackBarModule, 
+    MatDialogModule,
+    MatSnackBarModule,
     CustomUpperCasePipe,
     RemoveDashesPipe,
-    RedDirective, 
-    MatCardModule,  
-    MatButtonModule, 
+    RedDirective,
+    MatCardModule,
+    MatButtonModule,
     ShadowDirective,
-    MatTooltipModule
+    MatTooltipModule,
   ],
   templateUrl: './user-card.component.html',
-  styleUrl: './user-card.component.scss'
+  styleUrl: './user-card.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
 export class UserCardComponent {
+  readonly dialog = inject(MatDialog);
+  private snackBar = inject(MatSnackBar);
+
   @Input()
-  public user!: User
-  
+  public user!: User;
+
   @Output()
   public deleteUser = new EventEmitter<number>();
 
   @Output()
   public editUser = new EventEmitter<User>();
 
-  readonly dialog = inject(MatDialog);
-
-  private snackBar = inject(MatSnackBar);
-
   public openDeleteDialog(): void {
     const dialogRef = this.dialog.open(DeleteUserDialogComponent, {
-      data: {user:this.user},
+      data: { user: this.user },
     });
-
     dialogRef.afterClosed().subscribe((result: boolean | undefined) => {
       if (result) {
-        this.deleteUser.emit(this.user.id)
+        this.deleteUser.emit(this.user.id);
         this.snackBar.open('Пользователь удален', 'Ok', {
-          duration: 3000
+          duration: 3000,
         });
-      
-        console.log('Пользователь удален',this.user.id)
       }
-  
-      console.log(result)
     });
   }
 
   public openDialog(): void {
     const dialogRef = this.dialog.open(EditUserDialogComponent, {
-      data: {user:this.user},
+      data: { user: this.user },
     });
-    dialogRef.afterClosed().subscribe(editResult => {
-      console.log('МОДАЛКА ЗАКРЫЛАСЬ, ЗНАЧЕНИЕ ФОРМЫ:', editResult);
+    dialogRef.afterClosed().subscribe((editResult) => {
       if (editResult) {
-        this.editUser.emit(editResult)
+        this.editUser.emit(editResult);
         this.snackBar.open('Пользователь отредактирован', 'Ok', {
-          duration: 3000
+          duration: 3000,
         });
-      } 
+      }
     });
   }
 }

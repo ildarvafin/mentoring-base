@@ -11,6 +11,7 @@ export interface IUser {
   providedIn: 'root'
 })
 export class UserService {
+  
   private readonly userSubject$ = new BehaviorSubject<IUser | null>(null);
   public readonly user$ = this.userSubject$.asObservable()
 

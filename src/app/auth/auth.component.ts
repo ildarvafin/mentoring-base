@@ -10,6 +10,4 @@ import { MatIconModule } from '@angular/material/icon';
   templateUrl: './auth.component.html',
   styleUrl: './auth.component.scss'
 })
-export class AuthComponent {
-
-}
+export class AuthComponent {}
