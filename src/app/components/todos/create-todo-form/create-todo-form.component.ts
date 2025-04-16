@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, Output } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
@@ -34,34 +34,37 @@ export function completedValidator(): ValidatorFn {
     MatFormFieldModule,
     MatButtonModule,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
   ],
   templateUrl: './create-todo-form.component.html',
-  styleUrl: './create-todo-form.component.scss'
+  styleUrl: './create-todo-form.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
 export class CreateTodoFormComponent {
+
+  readonly dialogRef = inject(MatDialogRef<CreateTodoFormComponent>);
 
   @Output()
   public createTodo = new EventEmitter();
 
-  readonly dialogRef = inject(MatDialogRef<CreateTodoFormComponent>);
-
-  public form = new FormGroup({
-    title: new FormControl('', [Validators.required, Validators. minLength(3)]),
-    userId: new FormControl('', [Validators.required, Validators. minLength(1)]),
+  public form: FormGroup = new FormGroup({
+    title: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    userId: new FormControl('', [Validators.required, Validators.minLength(1)]),
     completed: new FormControl('', [Validators.required, completedValidator()]),
   });
 
   private getCompletedValue(): boolean {
     const value = this.form.get('completed')?.value!.trim().toLowerCase();
-    if (value === 'да')
-      return true;
+    if (value === 'да') return true;
     else return false;
   }
 
   public submitForm(): void {
-    this.dialogRef.close({...this.form.value, completed: this.getCompletedValue ()});
-    }
+    this.dialogRef.close({
+      ...this.form.value,
+      completed: this.getCompletedValue(),
+    });
+  }
+
 }
  

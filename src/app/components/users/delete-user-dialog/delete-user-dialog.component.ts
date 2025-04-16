@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule} from '@angular/material/dialog';
 import { MatButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,12 +9,9 @@ import { User } from '../../../interface/user.interface';
   standalone: true,
   imports: [MatDialogModule, MatButton, MatIconModule,],
   templateUrl: './delete-user-dialog.component.html',
-  styleUrl: './delete-user-dialog.component.scss'
+  styleUrl: './delete-user-dialog.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DeleteUserDialogComponent {
   public readonly data = inject<{user: User}>(MAT_DIALOG_DATA)
-
-  constructor () {
-    console. log('Данные которые приходят в модалку:',this.data)
-  }
 }

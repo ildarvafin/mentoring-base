@@ -1,4 +1,4 @@
-import { Component, inject } from "@angular/core";
+import { ChangeDetectionStrategy, Component, inject } from "@angular/core";
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from "@angular/forms";
 import { MatButtonModule } from "@angular/material/button";
 import { MAT_DIALOG_DATA, MatDialogClose } from "@angular/material/dialog";
@@ -7,8 +7,6 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatInputModule } from "@angular/material/input";
 import { User } from "../../../interface/user.interface";
 import { MatTooltipModule } from "@angular/material/tooltip";
-
-
 
 @Component({
     selector: 'app-edit-dialog',
@@ -23,14 +21,15 @@ import { MatTooltipModule } from "@angular/material/tooltip";
         MatIconModule, 
         MatDialogClose,
         MatTooltipModule,
-    ]
+    ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 
 export class EditUserDialogComponent {
 
     private readonly data = inject<{user: User}>(MAT_DIALOG_DATA);
 
-    public form = new FormGroup({
+    public form: FormGroup = new FormGroup({
         name: new FormControl(this.data.user.name, [Validators.required, Validators.minLength(3)]),
         email: new FormControl(this.data.user.email, [Validators.required, Validators.email]),
         phone: new FormControl(this.data.user.phone, [Validators.required,]),

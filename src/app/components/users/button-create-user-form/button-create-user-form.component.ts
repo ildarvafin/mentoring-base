@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateUserFormComponent } from '../create-user-form/create-user-form.component';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,21 +12,20 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   standalone: true,
   imports: [MatButtonModule, MatIconModule, HighlightDirective, MatTooltipModule],
   templateUrl: './button-create-user-form.component.html',
-  styleUrl: './button-create-user-form.component.scss'
+  styleUrl: './button-create-user-form.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonCreateUserFormComponent {
+
+  readonly dialog = inject(MatDialog);
+  private snackBar = inject(MatSnackBar);
 
   @Output()
   public createUser = new EventEmitter();
 
-  readonly dialog = inject(MatDialog);
-
-  private snackBar = inject(MatSnackBar);
-
   public openDialog(): void {
     const dialogRef = this.dialog.open(CreateUserFormComponent);
     dialogRef.afterClosed().subscribe(editResult => {
-      console.log('МОДАЛКА ЗАКРЫЛАСЬ, ЗНАЧЕНИЕ ФОРМЫ:', editResult);
       if (editResult) {
         this.createUser.emit(editResult)
         this.snackBar.open('Пользователь добавлен', 'Ok', {
@@ -35,4 +34,5 @@ export class ButtonCreateUserFormComponent {
       }
     });
   }
+
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, inject, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -11,21 +11,20 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   standalone: true,
   imports: [MatButtonModule, MatIconModule, MatTooltipModule],
   templateUrl: './button-create-todo-form.component.html',
-  styleUrl: './button-create-todo-form.component.scss'
+  styleUrl: './button-create-todo-form.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonCreateTodoFormComponent {
+
+  readonly dialog = inject(MatDialog);
+  private snackBar = inject(MatSnackBar);
   
   @Output()
   public createTodo = new EventEmitter();
 
-  readonly dialog = inject(MatDialog);
-
-  private snackBar = inject(MatSnackBar);
-
   public openDialog(): void {
     const dialogRef = this.dialog.open(CreateTodoFormComponent);
     dialogRef.afterClosed().subscribe(editResult => {
-      console.log('МОДАЛКА ЗАКРЫЛАСЬ, ЗНАЧЕНИЕ ФОРМЫ:', editResult);
       if (editResult) {
         this.createTodo.emit(editResult)
         this.snackBar.open('Пользователь добавлен', 'Ok', {

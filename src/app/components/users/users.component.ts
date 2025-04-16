@@ -10,51 +10,56 @@ import { Store } from '@ngrx/store';
 import { UserActions } from './store/users.actions';
 import { selectUsers } from './store/users.selectors';
 
-
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [NgFor, UserCardComponent, AsyncPipe, MatButtonModule, MatIconModule,ButtonCreateUserFormComponent],
+  imports: [
+    NgFor,
+    UserCardComponent,
+    AsyncPipe,
+    MatButtonModule,
+    MatIconModule,
+    ButtonCreateUserFormComponent,
+  ],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersComponent {
+  
+  private readonly usersApiService = inject(UsersApiService);
+  private readonly store = inject(Store);
+  public readonly users$ = this.store.select(selectUsers);
 
-    private readonly usersApiService = inject(UsersApiService);
+  constructor() {
+    this.usersApiService.getUseres().subscribe((response: User[]) => {
+      this.store.dispatch(UserActions.set({ users: response.slice(0, 8) }));
+    });
+  }
 
-    private readonly store = inject(Store);
+  public deleteUser(id: number) {
+    this.store.dispatch(UserActions.delete({ id }));
+  }
 
-    public readonly users$ = this.store.select(selectUsers);
+  public editUser(user: User) {
+    this.store.dispatch(UserActions.edit({ user }));
+  }
 
-    constructor() {
-        this.usersApiService.getUseres().subscribe(
-            (response: User[]) => {
-                this.store.dispatch(UserActions.set({ users: response.slice(0, 8)}));
-            }
-        )
-    };
+  public createUser(formData: createUser) {
+    this.store.dispatch(
+      UserActions.create({
+        user: {
+          id: new Date().getTime(),
+          name: formData.name,
+          email: formData.email,
+          website: formData.website,
+          company: {
+            name: formData.company.name,
+          },
+        },
+      })
+    );
+  }
 
-    public deleteUser(id: number) {
-        this.store.dispatch(UserActions.delete({ id }));
-    };
-
-    public editUser(user: User) {
-        this.store.dispatch(UserActions.edit({ user }));
-    };
-
-    public createUser(formData: createUser) {
-        this.store.dispatch(UserActions.create({
-            user: {
-                id: new Date().getTime(),
-                name: formData.name,
-                email: formData.email,
-                website: formData.website,
-                company: {
-                    name: formData.company.name,
-                },
-            }
-        }));
-    }
 }
 
