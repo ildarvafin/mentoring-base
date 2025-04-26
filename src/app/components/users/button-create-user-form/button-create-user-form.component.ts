@@ -1,5 +1,9 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, inject, Output } from '@angular/core';
+<<<<<<< HEAD
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+=======
+import { MatDialog } from '@angular/material/dialog';
+>>>>>>> 8846d83ef7da46eff1b5d40694beb9d15538fc51
 import { CreateUserFormComponent } from '../create-user-form/create-user-form.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';

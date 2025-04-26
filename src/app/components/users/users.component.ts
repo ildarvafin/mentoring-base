@@ -52,7 +52,10 @@ export class UsersComponent {
           id: new Date().getTime(),
           name: formData.name,
           email: formData.email,
+<<<<<<< HEAD
           phone: formData.phone,
+=======
+>>>>>>> 8846d83ef7da46eff1b5d40694beb9d15538fc51
           website: formData.website,
           company: {
             name: formData.company.name,
