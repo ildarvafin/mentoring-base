@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, inject, Output } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { CreateUserFormComponent } from '../create-user-form/create-user-form.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
@@ -24,7 +24,7 @@ export class ButtonCreateUserFormComponent {
   public createUser = new EventEmitter();
 
   public openDialog(): void {
-    const dialogRef = this.dialog.open(CreateUserFormComponent);
+    const dialogRef: MatDialogRef<CreateUserFormComponent> = this.dialog.open(CreateUserFormComponent);
     dialogRef.afterClosed().subscribe(editResult => {
       if (editResult) {
         this.createUser.emit(editResult)

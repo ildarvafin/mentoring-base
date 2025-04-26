@@ -1,7 +1,7 @@
 
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { EditTodoDialogComponent } from '../edit-todo-dialog/edit-todo-dialog.component';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DeleteTodoDialogComponent } from '../delete-todo-dialog/delete-todo-dialog.component';
@@ -31,7 +31,7 @@ export class TodoCardComponent {
    private snackBar = inject(MatSnackBar);
 
    public openDeleteDialog(): void {
-      const dialogRef = this.dialog.open(DeleteTodoDialogComponent, {
+      const dialogRef: MatDialogRef<DeleteTodoDialogComponent> = this.dialog.open(DeleteTodoDialogComponent, {
         data: {todo:this.todo},
       });
   
@@ -50,7 +50,7 @@ export class TodoCardComponent {
     }
 
   public openDialog(): void {
-      const dialogRef = this.dialog.open(EditTodoDialogComponent, {
+      const dialogRef: MatDialogRef<EditTodoDialogComponent> = this.dialog.open(EditTodoDialogComponent, {
         data: {todo:this.todo},
       });
       dialogRef.afterClosed().subscribe(editResult => {

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import {MatDialogModule} from '@angular/material/dialog';
 import { EditUserDialogComponent } from '../edit-user-dialog/edit-user-dialog.component';
 import { DeleteUserDialogComponent } from '../delete-user-dialog/delete-user-dialog.component';
@@ -45,7 +45,7 @@ export class UserCardComponent {
   public editUser = new EventEmitter<User>();
 
   public openDeleteDialog(): void {
-    const dialogRef = this.dialog.open(DeleteUserDialogComponent, {
+    const dialogRef: MatDialogRef<DeleteUserDialogComponent> = this.dialog.open(DeleteUserDialogComponent, {
       data: { user: this.user },
     });
     dialogRef.afterClosed().subscribe((result: boolean | undefined) => {
@@ -59,7 +59,7 @@ export class UserCardComponent {
   }
 
   public openDialog(): void {
-    const dialogRef = this.dialog.open(EditUserDialogComponent, {
+    const dialogRef: MatDialogRef<EditUserDialogComponent> = this.dialog.open(EditUserDialogComponent, {
       data: { user: this.user },
     });
     dialogRef.afterClosed().subscribe((editResult) => {

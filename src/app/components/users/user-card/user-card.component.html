@@ -2,7 +2,7 @@
     <mat-card-content>
         <p red>{{user.name | customUpperCase}}</p>
         <p red>{{user.email | customUpperCase}}</p>
-        <p red>{{user.phone | removeDashes}}</p>
+        <p red>{{user.phone || '' | removeDashes}}</p>
         <p red>{{user.website | customUpperCase}}</p>
         <p red>{{user.company.name}}</p>
     </mat-card-content>

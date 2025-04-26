@@ -4,23 +4,23 @@
     max-width: 1320px;
     padding: 0 300px;
 
-    .footer_cont {
+    .ftr_cont {
       height: 373px;
       background-color: #4b565e;
       padding: 35px 0;
       display: flex;
       justify-content: space-between;
     
-      .footer_left {
+      .ftr_left {
         img {
           margin-bottom: 32px;
         }
   
-        .contacts_footer {
+        .contacts_ftr {
           display: flex;
           justify-content: space-between;
   
-          .footer_phone {
+          .ftr_phone {
             span {
               color: #ffffff99;
               font-size: 12px;
@@ -33,7 +33,7 @@
             }
           }
   
-          .footer_mail {
+          .ftr_mail {
             margin-left: 30px;
   
             span {
@@ -63,7 +63,7 @@
           }
         }
   
-        .footer_icons {
+        .ftr_icons {
           display: flex;
           margin-top: 30px;
   
@@ -75,7 +75,7 @@
         }
       }
   
-      .footer_right {
+      .ftr_right {
         width: 534px;
   
         h3 {

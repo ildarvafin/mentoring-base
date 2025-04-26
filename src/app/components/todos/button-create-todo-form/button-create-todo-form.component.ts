@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, inject, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CreateTodoFormComponent } from '../create-todo-form/create-todo-form.component';
@@ -23,7 +23,7 @@ export class ButtonCreateTodoFormComponent {
   public createTodo = new EventEmitter();
 
   public openDialog(): void {
-    const dialogRef = this.dialog.open(CreateTodoFormComponent);
+    const dialogRef: MatDialogRef<CreateTodoFormComponent> = this.dialog.open(CreateTodoFormComponent);
     dialogRef.afterClosed().subscribe(editResult => {
       if (editResult) {
         this.createTodo.emit(editResult)
